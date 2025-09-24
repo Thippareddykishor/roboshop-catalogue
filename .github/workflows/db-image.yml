@@ -1,0 +1,14 @@
+name: DB shema image
+on: workflow_dispatch
+jobs:
+    Docker-Build-And-Push:
+        runs-on: self-hosted
+        steps:
+            - name: check out repo
+              uses: actions/checkout@v4
+            - name: Build and push
+              run: |
+                cd db
+                docker build -t 740279881161.dkr.ecr.us-east-1.amazonaws.com/catalogue-schema:latest
+                aws ecr get-login-password --region us-east-1 | docker login --username AWS  --password-stdin 740279881161.dkr.ecr.us-east-1.amazonaws.com
+                docker push 740279881161.dkr.ecr.us-east-1.amazonaws.com/catalogue-schema:latest
