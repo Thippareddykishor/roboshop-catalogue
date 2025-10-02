@@ -1,4 +1,4 @@
-FROM        redhat/ub19
+FROM        redhat/ubi9
 COPY        mongo.repo /etc/yum.repos.d
 RUN         dnf install mongodb-mongosh -y
 RUN         mkdir app
